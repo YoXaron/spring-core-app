@@ -2,10 +2,17 @@ package com.yoxaron.springcourse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component("musicPlayer")
 public class MusicPlayer {
+    @Value("${musicPlayer.name}")
+    private String name;
+
+    @Value("${musicPlayer.volume}")
+    private int volume;
+
     private Music classicalMusic;
     private Music rockMusic;
 
@@ -29,5 +36,13 @@ public class MusicPlayer {
         }
 
         return "Playing: " + song;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getVolume() {
+        return volume;
     }
 }
