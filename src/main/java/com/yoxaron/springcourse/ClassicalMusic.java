@@ -2,25 +2,29 @@ package com.yoxaron.springcourse;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 @Component("classicalBean")
 public class ClassicalMusic implements Music {
-    private ClassicalMusic() {
+    List<String> songs = null;
+
+
+    public ClassicalMusic() {
+        if (songs == null) {
+            songs = new ArrayList<>();
+            songs.add("Mozart - Eine kleine Nachtmusik");
+            songs.add("Liszt - Consolation No. 3");
+            songs.add("Beethoven - Symphony No. 5");
+        }
     }
 
-    public static ClassicalMusic getClassicalMusic() {
-        return new ClassicalMusic();
-    }
-
-    public void init() {
-        System.out.println("ClassicalMusic bean initialization");
-    }
-
-    public void destroy() {
-        System.out.println("ClassicalMusic bean destruction");
-    }
 
     @Override
     public String getSong() {
-        return "Hungarian Rhapsody";
+        Random random = new Random();
+        int index = random.nextInt(songs.size());
+        return songs.get(index);
     }
 }
