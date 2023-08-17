@@ -1,5 +1,8 @@
 package com.yoxaron.springcourse;
 
+import org.springframework.stereotype.Component;
+
+@Component("classicalBean")
 public class ClassicalMusic implements Music {
     private ClassicalMusic() {
     }
