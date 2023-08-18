@@ -1,4 +1,4 @@
-package com.yoxaron.springcourse;
+package com.yoxaron.springcourse.genres;
 
 public interface Music {
     String getSong();

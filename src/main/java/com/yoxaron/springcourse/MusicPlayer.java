@@ -1,9 +1,13 @@
 package com.yoxaron.springcourse;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import com.yoxaron.springcourse.genres.Genre;
+import com.yoxaron.springcourse.genres.Music;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @Component("musicPlayer")
 public class MusicPlayer {
@@ -13,29 +17,16 @@ public class MusicPlayer {
     @Value("${musicPlayer.volume}")
     private int volume;
 
-    private Music classicalMusic;
-    private Music rockMusic;
+    List<Music> genres;
 
-    @Autowired
-    public MusicPlayer(@Qualifier("classicalBean") Music music1,
-                       @Qualifier("rockBean") Music music2) {
-        this.classicalMusic = music1;
-        this.rockMusic = music2;
+    public MusicPlayer(List<Music> genres) {
+        this.genres = genres;
     }
 
-    public String playMusic(Genre genre) {
-        String song = "";
-
-        switch (genre) {
-            case ROCK:
-                song = rockMusic.getSong();
-                break;
-            case CLASSICAL:
-                song = classicalMusic.getSong();
-                break;
-        }
-
-        return "Playing: " + song;
+    public String playMusic() {
+        Random random = new Random();
+        int randomIndex = random.nextInt(genres.size());
+        return "Playing: " + genres.get(randomIndex).getSong() + " with volume " + volume;
     }
 
     public String getName() {
